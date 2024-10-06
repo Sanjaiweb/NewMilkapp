@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "584005365507",
+    "project_id": "milkapp2-fc830",
+    "storage_bucket": "milkapp2-fc830.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:584005365507:android:3c3636e25ccd90da8ec336",
+        "android_client_info": {
+          "package_name": "com.example.milkyway"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6Yq3aZoEAwwdxzMaKzZAFBZhdVas3Sro"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

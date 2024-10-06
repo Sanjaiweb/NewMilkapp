@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="primaryColor">#2A9D8F</color>
+    <color name="secondaryColor">#264653</color>
+    <color name="accentColor">#F4A261</color>
+    <color name="neutralColor">#E9C46A</color>
+    <color name="backgroundColor">#F4F4F4</color>
+    <color name="errorColor">#E76F51</color>
+    <color name="primaryText">#000000</color> <!-- Example: Black for primary text -->
+    <color name="secondaryText">#4A4A4A</color> <!-- Example: Dark gray for secondary text -->
+    <color name="hintColor">#888888</color>
+    <color name="buttonColor">#6200EE</color>
+</resources>

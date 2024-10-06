@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@color/backgroundColor">
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/titleAddCustomer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Customer"
+        android:textSize="24sp"
+        android:textColor="@color/primaryColor"
+        android:layout_gravity="center_horizontal"
+        android:paddingBottom="20dp"
+        android:fontFamily="sans-serif-medium" />
+
+    <!-- Customer Name Input -->
+    <EditText
+        android:id="@+id/editTextCustomerName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Customer Name"
+        android:background="@drawable/edittext_background"
+        android:padding="12dp"
+        android:textColor="@color/secondaryText"
+        android:textColorHint="@color/hintColor" />
+
+    <!-- Address Input -->
+    <EditText
+        android:id="@+id/editTextCustomerAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Address"
+        android:background="@drawable/edittext_background"
+        android:padding="12dp"
+        android:textColor="@color/secondaryText"
+        android:textColorHint="@color/hintColor" />
+
+    <!-- Phone Number Input -->
+    <EditText
+        android:id="@+id/editTextCustomerPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Phone Number"
+        android:inputType="phone"
+        android:background="@drawable/edittext_background"
+        android:padding="12dp"
+        android:textColor="@color/secondaryText"
+        android:textColorHint="@color/hintColor" />
+
+    <!-- Subscription Details Input -->
+    <EditText
+        android:id="@+id/editTextSubscription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Subscription Details"
+        android:background="@drawable/edittext_background"
+        android:padding="12dp"
+        android:textColor="@color/secondaryText"
+        android:textColorHint="@color/hintColor" />
+
+    <!-- Area Input -->
+    <EditText
+        android:id="@+id/editTextArea"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Area"
+        android:background="@drawable/edittext_background"
+        android:padding="12dp"
+        android:textColor="@color/secondaryText"
+        android:textColorHint="@color/hintColor" />
+
+    <!-- Add Customer Button -->
+    <Button
+        android:id="@+id/btnAddCustomer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Customer"
+        android:backgroundTint="@color/buttonColor"
+        android:textColor="@color/white"
+        android:padding="12dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="sans-serif-medium" />
+
+</LinearLayout>
