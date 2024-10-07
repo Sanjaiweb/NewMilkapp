@@ -1,10 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddDeliveryPersonActivity">
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@color/backgroundColor">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/titleAddDeliveryPerson"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Delivery Person"
+        android:textSize="24sp"
+        android:textColor="@color/primaryColor"
+        android:layout_gravity="center_horizontal"
+        android:paddingBottom="20dp" />
+
+    <EditText
+        android:id="@+id/editTextDeliveryName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Name"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/editTextDeliveryPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Phone"
+        android:inputType="phone" />
+
+    <EditText
+        android:id="@+id/editTextDeliveryEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Email"
+        android:inputType="textEmailAddress" />
+
+    <EditText
+        android:id="@+id/editTextDeliveryPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Password"
+        android:inputType="textPassword" />
+
+    <EditText
+        android:id="@+id/editTextDeliveryArea"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Assigned Area"
+        android:inputType="text" />
+
+    <Button
+        android:id="@+id/buttonAddDeliveryPerson"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Delivery Person"
+        android:backgroundTint="@color/primaryColor"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="16dp" />
+
+</LinearLayout>

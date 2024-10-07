@@ -3,41 +3,31 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:background="@color/white"
-    android:layout_marginBottom="8dp">
+    android:padding="10dp">
 
     <TextView
         android:id="@+id/textViewName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:textColor="@color/primaryText" />
-
-    <TextView
-        android:id="@+id/textViewAddress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/secondaryText" />
+        android:text="Name"
+        android:textStyle="bold"
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/textViewPhone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/secondaryText" />
+        android:text="Phone" />
 
     <TextView
-        android:id="@+id/textViewSubscription"
+        android:id="@+id/textViewEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/secondaryText" />
+        android:text="Email" />
 
     <TextView
         android:id="@+id/textViewArea"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/secondaryText" />
-
-
-
+        android:text="Area" />
 </LinearLayout>
