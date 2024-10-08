@@ -17,42 +17,42 @@
         android:paddingBottom="20dp" />
 
     <EditText
-        android:id="@+id/editTextDeliveryName"
+        android:id="@+id/editTextName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Name"
         android:inputType="text" />
 
     <EditText
-        android:id="@+id/editTextDeliveryPhone"
+        android:id="@+id/editTextPhone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Phone"
         android:inputType="phone" />
 
     <EditText
-        android:id="@+id/editTextDeliveryEmail"
+        android:id="@+id/editTextEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Email"
         android:inputType="textEmailAddress" />
 
     <EditText
-        android:id="@+id/editTextDeliveryPassword"
+        android:id="@+id/editTextPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Password"
         android:inputType="textPassword" />
 
     <EditText
-        android:id="@+id/editTextDeliveryArea"
+        android:id="@+id/editTextArea"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Assigned Area"
         android:inputType="text" />
 
     <Button
-        android:id="@+id/buttonAddDeliveryPerson"
+        android:id="@+id/btnAddDeliveryPerson"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Add Delivery Person"
