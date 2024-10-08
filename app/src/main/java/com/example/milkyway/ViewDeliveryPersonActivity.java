@@ -46,25 +46,24 @@ public class ViewDeliveryPersonActivity extends AppCompatActivity {
     }
 
     private void loadDeliveryPersons() {
-        CollectionReference deliveryPersonsRef = db.collection("shops").document(shopId).collection("deliveryPersons");
 
-        deliveryPersonsRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    deliveryPersonList.clear(); // Clear the list before adding new data
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        DeliveryPerson deliveryPerson = document.toObject(DeliveryPerson.class);
-                        deliveryPerson.setId(document.getId()); // Set document ID if needed
-                        deliveryPersonList.add(deliveryPerson);
+        db.collection("deliveryPersons")
+                .whereEqualTo("shopId", shopId) // Filter customers by shopId
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        deliveryPersonList.clear(); // Clear the list before adding new data
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            DeliveryPerson deliveryPerson = document.toObject(DeliveryPerson.class);
+                            deliveryPerson.setId(document.getId()); // Set document ID if needed
+                            deliveryPersonList.add(deliveryPerson);
+                        }
+                        adapter.notifyDataSetChanged(); // Notify adapter to refresh the list
+                    } else {
+                        Toast.makeText(ViewDeliveryPersonActivity.this, "Failed to load delivery persons", Toast.LENGTH_SHORT).show();
+                        Log.e("ViewDeliveryPerson", "Error retrieving documents: ", task.getException());
                     }
-                    adapter.notifyDataSetChanged(); // Notify adapter to refresh the list
-                } else {
-                    Toast.makeText(ViewDeliveryPersonActivity.this, "Failed to load delivery persons", Toast.LENGTH_SHORT).show();
-                    Log.e("ViewDeliveryPerson", "Error retrieving documents: ", task.getException());
-                }
-            }
-        });
+                });
     }
-
 }
+
