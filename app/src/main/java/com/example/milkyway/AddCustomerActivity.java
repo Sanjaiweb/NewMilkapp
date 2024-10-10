@@ -3,8 +3,10 @@ package com.example.milkyway;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,17 +14,23 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.DocumentSnapshot;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class AddCustomerActivity extends AppCompatActivity {
 
     private EditText editTextCustomerName, editTextCustomerAddress, editTextCustomerPhone, editTextSubscription, editTextArea;
+    private Spinner spinnerDeliveryPerson;
     private Button btnAddCustomer;
     private FirebaseFirestore db;
     private FirebaseAuth auth;
     private String shopId;
+    private ArrayAdapter<String> deliveryPersonAdapter;
+    private List<String> deliveryPersonIds = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +56,31 @@ public class AddCustomerActivity extends AppCompatActivity {
         editTextCustomerPhone = findViewById(R.id.editTextCustomerPhone);
         editTextSubscription = findViewById(R.id.editTextSubscription);
         editTextArea = findViewById(R.id.editTextArea);
+        spinnerDeliveryPerson = findViewById(R.id.spinnerDeliveryPerson);
         btnAddCustomer = findViewById(R.id.btnAddCustomer);
+
+        // Set up ArrayAdapter for spinner
+        deliveryPersonAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, new ArrayList<>());
+        deliveryPersonAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerDeliveryPerson.setAdapter(deliveryPersonAdapter);
+
+        // Load delivery persons from Firestore
+        db.collection("deliveryPersons")
+                .whereEqualTo("shopId", shopId)  // Only delivery persons from this shop
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        for (DocumentSnapshot doc : task.getResult()) {
+                            String name = doc.getString("name");
+                            String id = doc.getId();
+                            deliveryPersonAdapter.add(name);  // Add name to spinner
+                            deliveryPersonIds.add(id);  // Store ID for later use
+                        }
+                        deliveryPersonAdapter.notifyDataSetChanged();
+                    } else {
+                        Toast.makeText(AddCustomerActivity.this, "Failed to load delivery persons", Toast.LENGTH_SHORT).show();
+                    }
+                });
 
         // Set up button click listener
         btnAddCustomer.setOnClickListener(new View.OnClickListener() {
@@ -72,7 +104,15 @@ public class AddCustomerActivity extends AppCompatActivity {
             return;
         }
 
-        // Create customer data map including the shopId
+        // Get selected delivery person ID
+        int selectedIndex = spinnerDeliveryPerson.getSelectedItemPosition();
+        if (selectedIndex == -1) {
+            Toast.makeText(this, "Please select a delivery person", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        String deliveryPersonId = deliveryPersonIds.get(selectedIndex);
+
+        // Create customer data map including the shopId and deliveryPersonId
         Map<String, Object> customer = new HashMap<>();
         customer.put("name", name);
         customer.put("address", address);
@@ -80,6 +120,7 @@ public class AddCustomerActivity extends AppCompatActivity {
         customer.put("subscription", subscription);
         customer.put("area", area);
         customer.put("shopId", shopId);  // Associate customer with the shop
+        customer.put("deliveryPersonId", deliveryPersonId);  // Associate delivery person with customer
 
         // Add customer data to Firestore under the "customers" collection
         db.collection("customers")
@@ -105,5 +146,6 @@ public class AddCustomerActivity extends AppCompatActivity {
         editTextCustomerPhone.setText("");
         editTextSubscription.setText("");
         editTextArea.setText("");
+        spinnerDeliveryPerson.setSelection(0);
     }
 }

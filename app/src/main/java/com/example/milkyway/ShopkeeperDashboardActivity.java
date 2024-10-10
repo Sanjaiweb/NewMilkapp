@@ -1,11 +1,14 @@
 package com.example.milkyway;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class ShopkeeperDashboardActivity extends AppCompatActivity {
 
@@ -13,11 +16,27 @@ public class ShopkeeperDashboardActivity extends AppCompatActivity {
     private Button btnAddCustomer, btnViewCustomers, btnEditCustomer, btnDeleteCustomer;
     private Button btnAddDeliveryPerson, btnViewDeliveryPersons, btnEditDeliveryPerson, btnDeleteDeliveryPerson;
     private Button btnGenerateInvoices, btnViewAnalytics;
+    private FirebaseAuth auth;
+    private FirebaseFirestore db;
+    private String shopId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shopkeeper_dashboard);
+
+        // Initialize Firebase instances
+        db = FirebaseFirestore.getInstance();
+        auth = FirebaseAuth.getInstance();
+
+        // Retrieve shopId from the current user's UID
+        if (auth.getCurrentUser() != null) {
+            shopId = auth.getCurrentUser().getUid();
+        } else {
+            Toast.makeText(this, "Error: User not authenticated", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
 
         // Initialize customer management buttons
         btnAddCustomer = findViewById(R.id.btnAddCustomer);
@@ -37,6 +56,19 @@ public class ShopkeeperDashboardActivity extends AppCompatActivity {
 
         // Set up button listeners
         setupButtonListeners();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        // Check for authenticated user
+        if (auth.getCurrentUser() == null) {
+            Toast.makeText(this, "Session expired. Please log in again.", Toast.LENGTH_SHORT).show();
+            Intent loginIntent = new Intent(this, LoginActivity.class);
+            startActivity(loginIntent);
+            finish();
+        }
     }
 
     // Modular method to set up all button click listeners

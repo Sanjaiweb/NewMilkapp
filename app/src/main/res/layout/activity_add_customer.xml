@@ -73,6 +73,13 @@
         android:padding="12dp"
         android:textColor="@color/secondaryText"
         android:textColorHint="@color/hintColor" />
+    <!-- Delivery Person Dropdown -->
+    <Spinner
+        android:id="@+id/spinnerDeliveryPerson"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittext_background"
+        android:padding="12dp" />
 
     <!-- Add Customer Button -->
     <Button
@@ -85,5 +92,7 @@
         android:padding="12dp"
         android:layout_marginTop="20dp"
         android:fontFamily="sans-serif-medium" />
+
+
 
 </LinearLayout>
