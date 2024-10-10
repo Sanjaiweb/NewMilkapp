@@ -8,13 +8,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +21,7 @@ public class ViewDeliveryPersonActivity extends AppCompatActivity {
     private DeliveryPersonAdapter adapter;
     private FirebaseFirestore db;
     private String shopId;
+    private FirebaseAuth auth;
     private List<DeliveryPerson> deliveryPersonList;
 
     @Override
@@ -36,34 +33,43 @@ public class ViewDeliveryPersonActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         db = FirebaseFirestore.getInstance();
-        shopId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
+        auth = FirebaseAuth.getInstance();
         deliveryPersonList = new ArrayList<>();
         adapter = new DeliveryPersonAdapter(deliveryPersonList);
         recyclerView.setAdapter(adapter);
 
-        loadDeliveryPersons();
+        if (auth.getCurrentUser() != null) {
+            shopId = auth.getCurrentUser().getUid();
+            Log.d("ViewDeliveryPerson", "Current Shop ID: " + shopId);
+            loadDeliveryPersons();
+        } else {
+            Toast.makeText(this, "Error: User not authenticated", Toast.LENGTH_SHORT).show();
+            finish();
+        }
     }
 
     private void loadDeliveryPersons() {
-
         db.collection("deliveryPersons")
-                .whereEqualTo("shopId", shopId) // Filter customers by shopId
+                .whereEqualTo("shopId", shopId)
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        deliveryPersonList.clear(); // Clear the list before adding new data
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             DeliveryPerson deliveryPerson = document.toObject(DeliveryPerson.class);
-                            deliveryPerson.setId(document.getId()); // Set document ID if needed
+                            deliveryPerson.setId(document.getId());
                             deliveryPersonList.add(deliveryPerson);
+                            Log.d("DeliveryPerson", "Found delivery person: " + deliveryPerson.getName());
                         }
-                        adapter.notifyDataSetChanged(); // Notify adapter to refresh the list
+                        if (deliveryPersonList.isEmpty()) {
+                            Log.d("DeliveryPerson", "No delivery persons found for shopId: " + shopId);
+                            Toast.makeText(ViewDeliveryPersonActivity.this, "No delivery persons found", Toast.LENGTH_SHORT).show();
+                        }
+                        adapter.notifyDataSetChanged();
                     } else {
                         Toast.makeText(ViewDeliveryPersonActivity.this, "Failed to load delivery persons", Toast.LENGTH_SHORT).show();
                         Log.e("ViewDeliveryPerson", "Error retrieving documents: ", task.getException());
                     }
                 });
     }
-}
 
+}
