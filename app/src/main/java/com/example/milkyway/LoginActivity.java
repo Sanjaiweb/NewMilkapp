@@ -1,8 +1,6 @@
 package com.example.milkyway;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -89,8 +87,6 @@ public class LoginActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         FirebaseUser user = mAuth.getCurrentUser();
                         if (user != null) {
-                            // Store the user ID in SharedPreferences
-                            storeUserId(user.getUid());
                             // Successful login, proceed to the Shopkeeper dashboard
                             Intent intent = new Intent(this, ShopkeeperDashboardActivity.class);
                             startActivity(intent);
@@ -117,8 +113,6 @@ public class LoginActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         FirebaseUser user = mAuth.getCurrentUser();
                         if (user != null) {
-                            // Store the user ID in SharedPreferences
-                            storeUserId(user.getUid());
                             // Successful login, proceed to the Delivery Person dashboard
                             Intent intent = new Intent(this, DeliveryDashboardActivity.class);
                             startActivity(intent);
@@ -128,12 +122,5 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(this, "Authentication failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
-    }
-
-    private void storeUserId(String userId) {
-        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("userId", userId); // Store the user ID
-        editor.apply();
     }
 }
