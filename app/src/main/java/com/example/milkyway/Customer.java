@@ -1,28 +1,36 @@
 package com.example.milkyway;
+
 public class Customer {
-    private String id;
+    private String id; // Field to store the unique ID of the customer
     private String name;
     private String address;
     private String phone;
     private String subscription;
     private String area;
-    private String shopId;
-    private boolean deliveryStatus; // true if delivered, false otherwise
+    private String shopId; // Add shopId field
+    private boolean delivered; // Field to track if delivery has occurred
 
-    // Empty constructor required for Firestore
-    public Customer() {}
 
-    public Customer(String name, String address, String phone, String subscription, String area, String shopId) {
+    // Constructor
+    public Customer(String id, String name, String address, String phone, String subscription, String area, String shopId) {
+        this.id = id; // Initialize the ID
         this.name = name;
         this.address = address;
         this.phone = phone;
         this.subscription = subscription;
         this.area = area;
-        this.shopId = shopId;
-        this.deliveryStatus = false; // Default value for new customers
+        this.shopId = shopId; // Initialize the shopId
+        this.delivered = delivered;
     }
 
-    // Getters and Setters
+    // Getters
+    public String getId() {
+        return id;
+    }
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }
@@ -44,23 +52,15 @@ public class Customer {
     }
 
     public String getShopId() {
-        return shopId;
+        return shopId; // Getter for shopId
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    // Delivery status methods
     public boolean isDelivered() {
-        return deliveryStatus;
+        return delivered; // Getter for delivered
     }
 
-    public void setDeliveryStatus(boolean deliveryStatus) {
-        this.deliveryStatus = deliveryStatus;
+    public void setDelivered(boolean delivered) {
+        this.delivered = delivered; // Setter for delivered
     }
+
 }
