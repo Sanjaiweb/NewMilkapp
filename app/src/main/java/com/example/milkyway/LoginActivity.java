@@ -13,11 +13,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class LoginActivity extends AppCompatActivity {
 
     private EditText emailField, passwordField;
-    private Button shopkeeperTab, deliveryTab, loginButton;
+    private Button shopkeeperTab, deliveryTab, loginButton,registerButton;
     private boolean isShopkeeper = true; // Track the selected role
     private FirebaseAuth mAuth; // Firebase Authentication instance
 
@@ -35,6 +36,8 @@ public class LoginActivity extends AppCompatActivity {
         shopkeeperTab = findViewById(R.id.shopkeeperTab);
         deliveryTab = findViewById(R.id.deliveryTab);
         loginButton = findViewById(R.id.loginButton);
+        registerButton = findViewById(R.id.registerButton);
+
 
         // Set default selection
         updateUI();
@@ -44,6 +47,11 @@ public class LoginActivity extends AppCompatActivity {
             isShopkeeper = true;
             updateUI();
         });
+        registerButton.setOnClickListener(v -> {
+            Intent intent = new Intent(this, RegisterActivity.class);
+            startActivity(intent);
+        });
+
 
         deliveryTab.setOnClickListener(v -> {
             isShopkeeper = false;
@@ -114,7 +122,7 @@ public class LoginActivity extends AppCompatActivity {
                         FirebaseUser user = mAuth.getCurrentUser();
                         if (user != null) {
                             // Successful login, proceed to the Delivery Person dashboard
-                            Intent intent = new Intent(this, DeliveryDashboardActivity.class);
+                            Intent intent = new Intent(this, DeliveryPersonDashboardActivity.class);
                             startActivity(intent);
                             finish();
                         }

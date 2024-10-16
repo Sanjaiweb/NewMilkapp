@@ -1,89 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#F8F9FA"
     android:padding="24dp">
-    <!-- Light background color for a polished look -->
 
     <!-- App Title -->
-<TextView
-android:id="@+id/appTitle"
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:text="Milkyway Login"
-android:textColor="#212121"
-android:textSize="24sp"
-android:textStyle="bold"
-android:layout_centerHorizontal="true"
-android:layout_marginBottom="32dp"
-android:fontFamily="sans-serif-medium"/>
 
     <!-- Tabs for Shopkeeper and Delivery Person -->
-<LinearLayout
-android:id="@+id/tabLayout"
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:orientation="horizontal"
-android:gravity="center"
-android:layout_below="@id/appTitle"
-android:layout_marginBottom="24dp">
 
-<Button
-    android:id="@+id/shopkeeperTab"
-    android:layout_width="0dp"
-    android:layout_weight="1"
-    android:layout_height="48dp"
-    android:text="Shopkeeper"
-    android:background="@drawable/tab_selector"
-    android:textColor="#FFFFFF"
-    android:textStyle="bold"/>
+    <TextView
+        android:id="@+id/appTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-medium"
+        android:text="Milkyway Login"
+        android:textColor="#212121"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-<Button
-    android:id="@+id/deliveryTab"
-    android:layout_width="0dp"
-    android:layout_weight="1"
-    android:layout_height="48dp"
-    android:text="Delivery Person"
-    android:background="@drawable/tab_selector"
-    android:textColor="#FFFFFF"
-    android:textStyle="bold"/>
-</LinearLayout>
+    <LinearLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/appTitle">
+
+        <Button
+            android:id="@+id/deliveryTab"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:background="@drawable/tab_selector"
+            android:text="Delivery Person"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="228dp"
+            tools:layout_editor_absoluteY="41dp" />
+
+        <Button
+            android:id="@+id/shopkeeperTab"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:background="@drawable/tab_selector"
+            android:text="Shopkeeper"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="58dp"
+            tools:layout_editor_absoluteY="56dp" />
+    </LinearLayout>
 
     <!-- Email Field -->
-<EditText
-android:id="@+id/emailField"
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:hint="Email"
-android:inputType="textEmailAddress"
-android:background="@drawable/edittext_background"
-android:padding="16dp"
-android:layout_below="@id/tabLayout"
-android:layout_marginBottom="16dp"/>
 
     <!-- Password Field -->
-<EditText
-android:id="@+id/passwordField"
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:hint="Password"
-android:inputType="textPassword"
-android:background="@drawable/edittext_background"
-android:padding="16dp"
-android:layout_below="@id/emailField"
-android:layout_marginBottom="24dp"/>
 
     <!-- Login Button -->
-    <!-- Polished blue color -->
-<Button
-android:id="@+id/loginButton"
-android:layout_width="match_parent"
-android:layout_height="48dp"
-android:text="Login"
-android:background="#3F51B5"
-android:textColor="#FFFFFF"
-    android:textStyle="bold"
-    android:layout_below="@id/passwordField"/>
 
-    </RelativeLayout>
+    <!-- Register Button -->
+
+    <EditText
+        android:id="@+id/emailField"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/edittext_background"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:padding="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tabLayout" />
+
+    <EditText
+        android:id="@+id/passwordField"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/edittext_background"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:padding="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/emailField" />
+
+    <Button
+        android:id="@+id/loginButton"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        android:background="#3F51B5"
+        android:text="Login"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/passwordField" />
+
+    <Button
+        android:id="@+id/registerButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="#3F51B5"
+        android:text="Register"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/loginButton" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
