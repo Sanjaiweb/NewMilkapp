@@ -1,5 +1,6 @@
 package com.example.milkyway;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -66,27 +67,42 @@ public class AddDeliveryPersonActivity extends AppCompatActivity {
             return;
         }
 
-        // Prepare delivery person data
-        Map<String, Object> deliveryPerson = new HashMap<>();
-        deliveryPerson.put("name", name);
-        deliveryPerson.put("phone", phone);
-        deliveryPerson.put("email", email);
-        deliveryPerson.put("area", area);
-        deliveryPerson.put("shopId", shopId);
+        // Create Firebase Authentication user first
+        auth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        // Get the UID of the newly created user
+                        FirebaseUser newUser = task.getResult().getUser();
+                        if (newUser != null) {
+                            String deliveryPersonId = newUser.getUid();  // This will be used as document ID in Firestore
 
-        // Add delivery person data to Firestore under the "customers" collection
-        db.collection("deliveryPersons")
-                .add(deliveryPerson)
-                .addOnSuccessListener(documentReference -> {
-                    auth.createUserWithEmailAndPassword(email, password)
-                            .addOnCompleteListener(task -> {
-                                if (task.isSuccessful()) {
-                                    String deliveryPersonId = task.getResult().getUser().getUid();}});
-                    Toast.makeText(AddDeliveryPersonActivity.this, "Customer added successfully", Toast.LENGTH_SHORT).show();
-                    clearFields();
-                })
-                .addOnFailureListener(e -> Toast.makeText(AddDeliveryPersonActivity.this, "Failed to add customer: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                            // Prepare delivery person data
+                            Map<String, Object> deliveryPerson = new HashMap<>();
+                            deliveryPerson.put("name", name);
+                            deliveryPerson.put("phone", phone);
+                            deliveryPerson.put("email", email);
+                            deliveryPerson.put("area", area);
+                            deliveryPerson.put("shopId", shopId);
+
+                            // Add delivery person data to Firestore under the "deliveryPersons" collection using UID as document ID
+                            db.collection("deliveryPersons")
+                                    .document(deliveryPersonId)
+                                    .set(deliveryPerson)
+                                    .addOnSuccessListener(aVoid -> {
+                                        Toast.makeText(AddDeliveryPersonActivity.this, "Delivery person added successfully", Toast.LENGTH_SHORT).show();
+                                        clearFields();
+                                        Intent intent = new Intent(this, ShopkeeperDashboardActivity.class);
+                                        startActivity(intent);
+                                    })
+                                    .addOnFailureListener(e -> Toast.makeText(AddDeliveryPersonActivity.this, "Failed to add delivery person: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                        }
+                    } else {
+                        // Handle sign-up failure
+                        Toast.makeText(AddDeliveryPersonActivity.this, "Failed to create account: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
+
 
     private void clearFields() {
         editTextName.setText("");

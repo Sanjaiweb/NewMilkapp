@@ -18,4 +18,30 @@
     <color name="textColorPrimary">#212121</color>
     <color name="editTextBorderColor">#D1D1D1</color>
 
-</resources>
+    <color name="primary">#6200EE</color>
+
+    <color name="lightBackground">#F5F5F5</color>
+
+    <!-- Primary Colors -->
+
+        <color name="primaryLightColor">#BB86FC</color> <!-- Light Purple -->
+        <color name="primaryDarkColor">#3700B3</color> <!-- Dark Purple -->
+
+        <!-- Text Colors -->
+        <color name="primaryTextColor">#212121</color> <!-- Dark Gray for primary text -->
+        <color name="secondaryTextColor">#757575</color> <!-- Medium Gray for secondary text -->
+
+        <!-- Card Background Color -->
+        <color name="cardBackgroundColor">#FFFFFF</color> <!-- White for cards -->
+
+        <!-- Background Color -->
+
+
+        <!-- Accent Colors for Icons -->
+        <color name="iconTintColor">#03DAC5</color> <!-- Teal for icon tints -->
+
+        <!-- Accent and Ripple Colors -->
+        <color name="rippleColor">#BDBDBD</color> <!-- Light Gray for ripple effect -->
+    </resources>
+
+

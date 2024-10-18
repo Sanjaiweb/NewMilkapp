@@ -10,7 +10,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -91,6 +91,9 @@ public class AddCustomerActivity extends AppCompatActivity {
         });
     }
 
+
+
+    // In the addCustomer() method
     private void addCustomer() {
         String name = editTextCustomerName.getText().toString().trim();
         String address = editTextCustomerAddress.getText().toString().trim();
@@ -125,20 +128,21 @@ public class AddCustomerActivity extends AppCompatActivity {
         // Add customer data to Firestore under the "customers" collection
         db.collection("customers")
                 .add(customer)
-                .addOnSuccessListener(new com.google.android.gms.tasks.OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Toast.makeText(AddCustomerActivity.this, "Customer added successfully", Toast.LENGTH_SHORT).show();
-                        clearFields();
-                    }
+                .addOnSuccessListener(documentReference -> {
+                    String customerId = documentReference.getId(); // Get the new customer ID
+
+                    // Now add this customer ID to the delivery person's assignedCustomers array
+                    db.collection("deliveryPersons").document(deliveryPersonId)
+                            .update("assignedCustomers", FieldValue.arrayUnion(customerId))
+                            .addOnSuccessListener(aVoid -> {
+                                Toast.makeText(AddCustomerActivity.this, "Customer added and assigned successfully", Toast.LENGTH_SHORT).show();
+                                clearFields();
+                            })
+                            .addOnFailureListener(e -> Toast.makeText(AddCustomerActivity.this, "Failed to assign customer: " + e.getMessage(), Toast.LENGTH_SHORT).show());
                 })
-                .addOnFailureListener(new com.google.android.gms.tasks.OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(AddCustomerActivity.this, "Failed to add customer: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
+                .addOnFailureListener(e -> Toast.makeText(AddCustomerActivity.this, "Failed to add customer: " + e.getMessage(), Toast.LENGTH_SHORT).show());
     }
+
 
     private void clearFields() {
         editTextCustomerName.setText("");
