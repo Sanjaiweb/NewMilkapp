@@ -35,7 +35,7 @@ public class ViewDeliveryPersonActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
         deliveryPersonList = new ArrayList<>();
-        adapter = new DeliveryPersonAdapter(deliveryPersonList);
+        adapter = new DeliveryPersonAdapter((ArrayList<DeliveryPerson>) deliveryPersonList);
         recyclerView.setAdapter(adapter);
 
         if (auth.getCurrentUser() != null) {
