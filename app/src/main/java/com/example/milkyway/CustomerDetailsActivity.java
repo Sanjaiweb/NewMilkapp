@@ -37,14 +37,14 @@ public class CustomerDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_customer_details);
 
         // Initialize UI components
-        customerName = findViewById(R.id.customerName);
-        customerAddress = findViewById(R.id.customerAddress);
-        subscriptionStatus = findViewById(R.id.subscriptionStatus);
-        callButton = findViewById(R.id.callButton);
-        messageButton = findViewById(R.id.messageButton);
+        customerName         = findViewById(R.id.customerName);
+        customerAddress      = findViewById(R.id.customerAddress);
+        subscriptionStatus   = findViewById(R.id.subscriptionStatus);
+        callButton           = findViewById(R.id.callButton);
+        messageButton        = findViewById(R.id.messageButton);
         deliveryStatusSwitch = findViewById(R.id.deliveryStatusSwitch);
-        updateStatusButton = findViewById(R.id.updateStatusButton);
-        backButton = findViewById(R.id.backButton);
+        updateStatusButton   = findViewById(R.id.updateStatusButton);
+        backButton           = findViewById(R.id.backButton);
 
         // Initialize ProgressBar
         progressBar = findViewById(R.id.progressBar); // Add this to your layout XML

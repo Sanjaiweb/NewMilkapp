@@ -1,10 +1,66 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfileActivity">
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="16dp"
+    android:background="@color/backgroundColor">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageView
+        android:id="@+id/profileImage"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_deliveryperson"
+        android:layout_gravity="center"
+        android:contentDescription="Profile Picture"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/circle_background"
+        android:elevation="6dp"/>
+
+    <TextView
+        android:id="@+id/profileName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Name: John Doe"
+        android:textSize="20sp"
+        android:textColor="@color/primaryText"
+        android:gravity="center"
+        android:fontFamily="@font/poppins_bold"
+        android:layout_marginBottom="10dp"/>
+
+    <TextView
+        android:id="@+id/profileEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Email: johndoe@example.com"
+        android:textSize="16sp"
+        android:textColor="@color/secondaryText"
+        android:gravity="center"
+        android:fontFamily="@font/poppins_regular"
+        android:layout_marginBottom="10dp"/>
+
+    <TextView
+        android:id="@+id/profilePhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Phone: +1234567890"
+        android:textSize="16sp"
+        android:textColor="@color/secondaryText"
+        android:gravity="center"
+        android:fontFamily="@font/poppins_regular"
+        android:layout_marginBottom="20dp"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/editProfileButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_edit"
+        android:layout_gravity="center"
+        app:backgroundTint="@color/primary"
+        app:rippleColor="@color/primaryLightColor"
+        app:elevation="8dp"/>
+
+
+</LinearLayout>
