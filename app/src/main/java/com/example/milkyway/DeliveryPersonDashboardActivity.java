@@ -1,7 +1,9 @@
 package com.example.milkyway;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -39,6 +41,17 @@ public class DeliveryPersonDashboardActivity extends AppCompatActivity {
         textView = findViewById(R.id.textViewName);
         recyclerViewCustomers = findViewById(R.id.recyclerViewCustomers);
 
+        // Retrieve Profile ImageView and set OnClickListener
+        ImageView profileImageView = findViewById(R.id.imageViewProfile);
+        profileImageView.setOnClickListener(v -> {
+            try {
+                Intent intent = new Intent(DeliveryPersonDashboardActivity.this, ProfileActivity.class);
+                startActivity(intent);
+            } catch (Exception e) {
+                Log.e(TAG, "Error starting ProfileActivity", e);
+            }
+        });
+
         // Set up RecyclerView
         recyclerViewCustomers.setLayoutManager(new LinearLayoutManager(this));
         customerAdapter = new CustomerAdapter(this, customerList);
@@ -55,6 +68,12 @@ public class DeliveryPersonDashboardActivity extends AppCompatActivity {
         } else {
             textView.setText("User not logged in");
         }
+        // Set OnClickListener for the profile button
+        profileImageView.setOnClickListener(v -> {
+            // Move to ProfileActivity when profile button is clicked
+            Intent intent = new Intent(DeliveryPersonDashboardActivity.this, ProfileActivity.class);
+            startActivity(intent);
+        });
     }
 
     private void fetchUserData(String userId) {
