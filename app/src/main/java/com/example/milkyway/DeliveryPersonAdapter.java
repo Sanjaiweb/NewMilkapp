@@ -6,31 +6,29 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import java.util.List;
+import java.util.ArrayList;
 
 public class DeliveryPersonAdapter extends RecyclerView.Adapter<DeliveryPersonAdapter.DeliveryPersonViewHolder> {
 
-    private List<DeliveryPerson> deliveryPersonList;
+    private ArrayList<DeliveryPerson> deliveryPersonList;
 
-    public DeliveryPersonAdapter(List<DeliveryPerson> deliveryPersonList) {
+    public DeliveryPersonAdapter(ArrayList<DeliveryPerson> deliveryPersonList) {
         this.deliveryPersonList = deliveryPersonList;
     }
 
     @NonNull
     @Override
     public DeliveryPersonViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_delivery_person, parent, false);
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_delivery_person, parent, false);
         return new DeliveryPersonViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull DeliveryPersonViewHolder holder, int position) {
         DeliveryPerson deliveryPerson = deliveryPersonList.get(position);
-        holder.textViewName.setText(deliveryPerson.getName());
-        holder.textViewPhone.setText(deliveryPerson.getPhone());
-        holder.textViewEmail.setText(deliveryPerson.getEmail());
-        holder.textViewArea.setText(deliveryPerson.getArea());
+        holder.nameTextView.setText(deliveryPerson.getName());
+        holder.statusTextView.setText(deliveryPerson.getStatus()); // Display status if needed
     }
 
     @Override
@@ -39,14 +37,13 @@ public class DeliveryPersonAdapter extends RecyclerView.Adapter<DeliveryPersonAd
     }
 
     static class DeliveryPersonViewHolder extends RecyclerView.ViewHolder {
-        TextView textViewName, textViewPhone, textViewEmail, textViewArea;
+        TextView nameTextView;
+        TextView statusTextView;
 
         public DeliveryPersonViewHolder(@NonNull View itemView) {
             super(itemView);
-            textViewName = itemView.findViewById(R.id.textViewName);
-            textViewPhone = itemView.findViewById(R.id.textViewPhone);
-            textViewEmail = itemView.findViewById(R.id.textViewEmail);
-            textViewArea = itemView.findViewById(R.id.textViewArea);
+            nameTextView = itemView.findViewById(R.id.deliveryPersonName);
+            statusTextView = itemView.findViewById(R.id.deliveryPersonStatus);
         }
     }
 }

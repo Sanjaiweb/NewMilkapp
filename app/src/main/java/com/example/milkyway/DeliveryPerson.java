@@ -1,45 +1,40 @@
 package com.example.milkyway;
-
 public class DeliveryPerson {
     private String id;
     private String name;
-    private String phone;
     private String email;
+    private String phone;
     private String area;
+    private String status;
 
-    // Required no-argument constructor for Firestore
+    // Default constructor required for calls to DataSnapshot.getValue(DeliveryPerson.class)
     public DeliveryPerson() {}
 
-    public DeliveryPerson(String name, String phone, String email, String area) {
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.area = area;
-    }
-
-    // Getter and Setter for id
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
+    public DeliveryPerson(String id, String name, String email, String phone, String area, String status) {
         this.id = id;
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.area = area;
+        this.status = status;
     }
 
-    // Getters only (remove setters if not needed)
-    public String getName() {
-        return name;
-    }
+    // Getters and Setters
+    public String getId() { return id; }
+    public void setId(String id) { this.id = id; }
 
-    public String getPhone() {
-        return phone;
-    }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
 
-    public String getEmail() {
-        return email;
-    }
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
 
-    public String getArea() {
-        return area;
-    }
+    public String getPhone() { return phone; }
+    public void setPhone(String phone) { this.phone = phone; }
+
+    public String getArea() { return area; }
+    public void setArea(String area) { this.area = area; }
+
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
 }
