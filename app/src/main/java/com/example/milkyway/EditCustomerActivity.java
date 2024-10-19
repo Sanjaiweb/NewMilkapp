@@ -8,7 +8,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.DocumentReference;
 
 public class EditCustomerActivity extends AppCompatActivity {
 
@@ -50,11 +49,13 @@ public class EditCustomerActivity extends AppCompatActivity {
                 .addOnSuccessListener(documentSnapshot -> {
                     if (documentSnapshot.exists()) {
                         Customer customer = documentSnapshot.toObject(Customer.class);
-                        editTextName.setText(customer.getName());
-                        editTextAddress.setText(customer.getAddress());
-                        editTextPhone.setText(customer.getPhone());
-                        editTextSubscription.setText(customer.getSubscription());
-                        editTextArea.setText(customer.getArea());
+                        if (customer != null) {
+                            editTextName.setText(customer.getName());
+                            editTextAddress.setText(customer.getAddress());
+                            editTextPhone.setText(customer.getPhone());
+                            editTextSubscription.setText(customer.getSubscription());
+                            editTextArea.setText(customer.getArea());
+                        }
                     } else {
                         Toast.makeText(EditCustomerActivity.this, "Customer not found", Toast.LENGTH_SHORT).show();
                         finish();
@@ -64,21 +65,27 @@ public class EditCustomerActivity extends AppCompatActivity {
     }
 
     private void updateCustomer() {
-        String name = editTextName.getText().toString();
-        String address = editTextAddress.getText().toString();
-        String phone = editTextPhone.getText().toString();
-        String subscription = editTextSubscription.getText().toString();
-        String area = editTextArea.getText().toString();
+        String name = editTextName.getText().toString().trim();
+        String address = editTextAddress.getText().toString().trim();
+        String phone = editTextPhone.getText().toString().trim();
+        String subscription = editTextSubscription.getText().toString().trim();
+        String area = editTextArea.getText().toString().trim();
 
         // Create a Customer object with updated values
-        Customer updatedCustomer = new Customer(name, address, phone, subscription, area, null); // Keep shopId as null since we don't want to update it.
+        // Use customerId directly as it holds the ID of the customer being updated
+        Customer updatedCustomer = new Customer(customerId, name, address, phone, subscription, area, null);
 
+        // Update the customer document in Firestore
         db.collection("customers").document(customerId)
-                .set(updatedCustomer)
+                .update("name", name,
+                        "address", address,
+                        "phone", phone,
+                        "subscription", subscription,
+                        "area", area)
                 .addOnSuccessListener(aVoid -> {
                     Toast.makeText(EditCustomerActivity.this, "Customer updated successfully", Toast.LENGTH_SHORT).show();
                     finish();
                 })
                 .addOnFailureListener(e -> Toast.makeText(EditCustomerActivity.this, "Error updating customer: " + e.getMessage(), Toast.LENGTH_SHORT).show());
-    }
-}
+
+    }}
