@@ -9,9 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +44,9 @@ public class ViewCustomerActivity extends AppCompatActivity {
         recyclerViewCustomers = findViewById(R.id.recyclerViewCustomers);
         recyclerViewCustomers.setLayoutManager(new LinearLayoutManager(this));
         customerList = new ArrayList<>();
-        customerAdapter = new CustomerAdapter(customerList);
+
+        // Instantiate CustomerAdapter with context and the customer list
+        customerAdapter = new CustomerAdapter(this, customerList); // Use 'this' for context
         recyclerViewCustomers.setAdapter(customerAdapter);
 
         loadCustomers();
@@ -69,5 +69,4 @@ public class ViewCustomerActivity extends AppCompatActivity {
                     }
                 });
     }
-
 }
