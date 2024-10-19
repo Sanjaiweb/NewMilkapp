@@ -3,31 +3,18 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="10dp">
+    android:padding="8dp">
 
     <TextView
-        android:id="@+id/textViewName"
+        android:id="@+id/deliveryPersonName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Name"
-        android:textStyle="bold"
-        android:textSize="16sp" />
+        android:textSize="16sp"/>
 
     <TextView
-        android:id="@+id/textViewPhone"
+        android:id="@+id/deliveryPersonStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Phone" />
-
-    <TextView
-        android:id="@+id/textViewEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Email" />
-
-    <TextView
-        android:id="@+id/textViewArea"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Area" />
+        android:textSize="14sp"
+        android:textColor="#888"/>
 </LinearLayout>
